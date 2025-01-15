@@ -52,9 +52,10 @@ namespace Algoritmo_PSO_Problema_PHUB
             PHUB = new Phub();
             bool datos_validos = PHUB.LeerDatos(path);
 
-            if (!datos_validos) {
+            if (!datos_validos)
+            {
                 System.Windows.Forms.MessageBox.Show("El conjunto de datos de entrada no es válido");
-                return; 
+                return;
             }
 
             rnd = new Random();
@@ -63,7 +64,7 @@ namespace Algoritmo_PSO_Problema_PHUB
             soluciones = new StringBuilder();
             mejor_solucion = new StringBuilder();
             tiempo = new TimeSpan();
-        } 
+        }
 
         public void SetParametros(int NUMERO_PARTICULAS, int ITERACIONES, double W, double C1, double C2, string path, bool guardar_soluciones)
         {
@@ -99,7 +100,7 @@ namespace Algoritmo_PSO_Problema_PHUB
             // Inicializar las variables relacionadas con la mejor solución
             List<Particula> particulas = new List<Particula>();
             List<int> gBestPosition = new List<int>();
-            
+
             // Establecer el máximo valor como mejor global (puesto que se trata de minimización)
             gBest = double.MaxValue;
 
@@ -119,12 +120,12 @@ namespace Algoritmo_PSO_Problema_PHUB
                 var (hubs, cost) = PHUB.ObjectiveFunction(particula.Posicion);
                 if (guardar_soluciones) AgregarSolucion(hubs, cost);
 
-                
+
                 // Ya que se trata de la primera asignación a cada partícula
                 // no es necesario verificar si su costo es el mejor local
                 particula.PBest = cost;
                 particula.MejorPosicion = new List<int>(particula.Posicion);
-               
+
                 // Verificar que si el costo al evaluar la partícula es menor que el mejor global
                 if (cost < gBest)
                 {
@@ -132,7 +133,7 @@ namespace Algoritmo_PSO_Problema_PHUB
                     gBestPosition = new List<int>(particula.Posicion);
                     gBest = cost;
                     gBestHubs = hubs;
-                }               
+                }
 
                 particulas.Add(particula);
             }
@@ -276,7 +277,7 @@ namespace Algoritmo_PSO_Problema_PHUB
             return (gBestHubs, gBest, tiempo);
         }
 
-        public (List<Hub> hubs, double costo, string soluciones_csv) ejecutar_enlistando()
+        public (List<Hub> hubs, double costo, string soluciones_csv) ejecutar_enlistando(int intervalo_guardado, int n_repeticion)
         {
             // Inicializar las variables relacionadas con la mejor solución
             List<Particula> particulas = new List<Particula>();
@@ -298,7 +299,7 @@ namespace Algoritmo_PSO_Problema_PHUB
                 }
 
                 // Evaluar la primera asignación aleatoria de cada partícula
-                var (hubs, cost) = PHUB.ObjectiveFunction(particula.Posicion);                
+                var (hubs, cost) = PHUB.ObjectiveFunction(particula.Posicion);
 
                 // Ya que se trata de la primera asignación a cada partícula
                 // no es necesario verificar si su costo es el mejor local
@@ -354,7 +355,11 @@ namespace Algoritmo_PSO_Problema_PHUB
                     }
                 }
 
-                if (guardar_soluciones) EnlistarSolucion(iter + 1, gBest);
+                // Almacenar la solución en la variable correspondiente concatenandola en formato csv
+                if ((iter + 1) % intervalo_guardado == 0)
+                {
+                    EnlistarSolucion(n_repeticion, iter + 1, gBest);
+                }
             }
 
 
@@ -364,9 +369,9 @@ namespace Algoritmo_PSO_Problema_PHUB
             return (gBestHubs, gBest, soluciones_csv.ToString());
         }
 
-        private void EnlistarSolucion(int i, double costoTotal)
+        private void EnlistarSolucion(int n_repeticion, int i, double costoTotal)
         {
-            soluciones_csv.AppendLine($"{i}; {costoTotal}");
+            soluciones_csv.AppendLine($"Repeticion{n_repeticion};{i};{costoTotal}");
         }
 
         private void AgregarSolucion(List<Hub> hubs, double costoTotal)

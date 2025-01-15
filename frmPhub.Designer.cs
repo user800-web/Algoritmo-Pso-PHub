@@ -40,6 +40,8 @@ namespace Algoritmo_PSO_Problema_PHUB
             this.Txt_NumeroIteraciones = new System.Windows.Forms.TextBox();
             this.Btn_SelecciónDatos = new System.Windows.Forms.Button();
             this.dtdemandas = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.demanda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSoluciones = new System.Windows.Forms.RichTextBox();
             this.Pbx_Nodos = new System.Windows.Forms.PictureBox();
             this.pnlEncabezado = new System.Windows.Forms.Panel();
@@ -48,8 +50,6 @@ namespace Algoritmo_PSO_Problema_PHUB
             this.pnlDatos = new System.Windows.Forms.Panel();
             this.pnlResultados = new System.Windows.Forms.Panel();
             this.txt_MejorSolucion = new System.Windows.Forms.RichTextBox();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.demanda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pnl_Head.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtdemandas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pbx_Nodos)).BeginInit();
@@ -168,7 +168,7 @@ namespace Algoritmo_PSO_Problema_PHUB
             this.Txt_NumeroIteraciones.Name = "Txt_NumeroIteraciones";
             this.Txt_NumeroIteraciones.Size = new System.Drawing.Size(143, 26);
             this.Txt_NumeroIteraciones.TabIndex = 1;
-            this.Txt_NumeroIteraciones.Text = "100";
+            this.Txt_NumeroIteraciones.Text = "10";
             this.Txt_NumeroIteraciones.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Btn_SelecciónDatos
@@ -200,6 +200,19 @@ namespace Algoritmo_PSO_Problema_PHUB
             this.dtdemandas.RowHeadersWidth = 10;
             this.dtdemandas.Size = new System.Drawing.Size(108, 514);
             this.dtdemandas.TabIndex = 11;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // demanda
+            // 
+            this.demanda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.demanda.HeaderText = "Dem.";
+            this.demanda.Name = "demanda";
+            this.demanda.ReadOnly = true;
             // 
             // txtSoluciones
             // 
@@ -287,19 +300,6 @@ namespace Algoritmo_PSO_Problema_PHUB
             this.txt_MejorSolucion.Size = new System.Drawing.Size(328, 263);
             this.txt_MejorSolucion.TabIndex = 11;
             this.txt_MejorSolucion.Text = "";
-            // 
-            // id
-            // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // demanda
-            // 
-            this.demanda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.demanda.HeaderText = "Dem.";
-            this.demanda.Name = "demanda";
-            this.demanda.ReadOnly = true;
             // 
             // frmPhub
             // 
